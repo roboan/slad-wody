@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ślad Wody — edukacyjna gra paragrafowa o budowie studni w Czadzie.">
+  <title>Ślad Wody — misja w Czadzie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bree+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#game">Przejdź do gry</a>
+
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Ślad Wody — strona główna">
+      <span class="brand-mark" aria-hidden="true"><span>●</span></span>
+      <span class="brand-copy"><b>ŚLAD WODY</b><small>misja interaktywna</small></span>
+    </a>
+    <div class="header-side">
+      <span class="header-kicker">CZAD · SAHEL</span>
+      <button class="sound-button" id="resetButton" type="button" title="Zacznij od nowa">↻ <span>Nowa gra</span></button>
+    </div>
+  </header>
+
+  <div class="mission-strip">
+    <p><b>GŁOSIMY NADZIEJĘ</b><span aria-hidden="true">•</span>POMAGAMY MĄDRZE<span aria-hidden="true">•</span>TWORZYMY WIĘZI</p>
+  </div>
+
+  <main id="game" class="game-shell">
+    <section class="story-panel" aria-live="polite">
+      <div class="chapter-line">
+        <span id="chapterTag">PROLOG</span>
+        <div class="progress-track" aria-label="Postęp misji"><i id="progressBar"></i></div>
+        <span id="progressText">0 / 7</span>
+      </div>
+
+      <div id="sceneArt" class="scene-art" aria-hidden="true">
+        <div class="sun"></div>
+        <div class="acacia"><i></i><b></b></div>
+        <div class="well"><i></i><b></b></div>
+        <div class="ground-line"></div>
+        <span class="coordinates">12°N / 18°E</span>
+      </div>
+
+      <article class="story-card">
+        <p class="eyebrow" id="eyebrow">MISJA: BÉRÉ</p>
+        <h1 id="sceneTitle">Studnia, która milczy</h1>
+        <div id="sceneText" class="scene-text"></div>
+        <div id="factCard" class="fact-card" hidden></div>
+        <div id="choices" class="choices"></div>
+        <p id="feedback" class="feedback" tabindex="-1" hidden></p>
+      </article>
+    </section>
+
+    <aside class="field-panel" aria-label="Dziennik terenowy">
+      <section class="status-card">
+        <div class="status-head">
+          <div>
+            <span class="micro-label">DZIEŃ MISJI</span>
+            <strong id="dayValue">—</strong>
+          </div>
+          <div class="weather"><span aria-hidden="true">☀</span><b>41°C</b><small>pora sucha</small></div>
+        </div>
+
+        <div class="meters">
+          <div class="meter-row">
+            <div><span>Zaufanie wioski</span><b id="trustValue">50%</b></div>
+            <div class="meter"><i id="trustBar"></i></div>
+          </div>
+          <div class="meter-row">
+            <div><span>Czas do deszczy</span><b id="timeValue">8 dni</b></div>
+            <div class="meter danger"><i id="timeBar"></i></div>
+          </div>
+          <div class="meter-row">
+            <div><span>Budżet</span><b id="budgetValue">15 000 zł</b></div>
+            <div class="meter money"><i id="budgetBar"></i></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="notebook">
+        <div class="notebook-head">
+          <div>
+            <span class="micro-label">NOTATNIK TERENOWY</span>
+            <h2>Trop(y) <b id="clueCount">0/5</b></h2>
+          </div>
+          <span class="paperclip" aria-hidden="true"></span>
+        </div>
+        <div id="clueList" class="clue-list">
+          <p class="empty-note">Wysłuchuj ludzi. Sprawdzaj szczegóły. Nie każda sprzeczność oznacza oszustwo.</p>
+        </div>
+      </section>
+
+      <section class="map-card">
+        <span class="micro-label">SZKIC TERENU</span>
+        <div class="mini-map" aria-label="Schemat wioski Béré">
+          <span class="map-road"></span>
+          <i class="map-pin school"><b>szkoła</b></i>
+          <i class="map-pin clinic"><b>klinika</b></i>
+          <i class="map-pin bore"><b>stary odwiert</b></i>
+          <span class="dry-river">pora deszczowa →</span>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <section class="learning-section" id="about">
+    <div>
+      <p class="eyebrow">GRA OPARTA NA REALIACH</p>
+      <h2>Jedna studnia. Wiele decyzji.</h2>
+    </div>
+    <p>Wieś Béré i bohaterowie są fikcyjni, ale wyzwania zebrano z relacji misjonarzy pracujących w Czadzie oraz danych organizacji humanitarnych. Gra pokazuje, że trwały dostęp do wody to nie tylko odwiert: to rozpoznanie terenu, higiena, naprawy i odpowiedzialność wspólnoty.</p>
+  </section>
+
+  <footer>
+    <div>
+      <b>ŹRÓDŁA I KONTEKST</b>
+      <p>Stan materiałów: czerwiec 2026. Dane procentowe zawsze podano z rokiem źródłowym.</p>
+    </div>
+    <ul>
+      <li><a href="https://www.misjesercanow.pl/aktualnosci/okienko-pogodowe-na-budowe-studni-w-czadzie" target="_blank" rel="noreferrer">Misje Sercanów — „Okienko pogodowe”</a></li>
+      <li><a href="https://www.misjesercanow.pl/projekty/budowa-studni-w-czadzie" target="_blank" rel="noreferrer">Misje Sercanów — Budowa studni w Czadzie</a></li>
+      <li><a href="https://www.unicef.org/chad/water-sanitation-and-hygiene" target="_blank" rel="noreferrer">UNICEF Chad — Water, sanitation and hygiene</a></li>
+      <li><a href="https://www.who.int/news-room/fact-sheets/detail/drinking-water" target="_blank" rel="noreferrer">WHO — Drinking-water</a></li>
+    </ul>
+    <p class="credit">Projekt edukacyjny inspirowany energicznym, misyjnym stylem wizualnym misjesercanow.pl. Nie jest oficjalnym materiałem organizacji.</p>
+  </footer>
+
+  <div class="intro-overlay" id="introOverlay" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+    <div class="intro-card">
+      <div class="intro-visual" aria-hidden="true">
+        <span class="intro-stamp">AKTA / 07</span>
+        <div class="big-drop">?</div>
+        <span class="dashed-path"></span>
+      </div>
+      <div class="intro-copy">
+        <p class="eyebrow">EDUKACYJNA GRA PARAGRAFOWA</p>
+        <h2 id="introTitle">Ślad Wody</h2>
+        <p class="intro-lead">Osiem dni. Jedna wioska. Odwiert, który nie powinien był wyschnąć.</p>
+        <p>Dołączasz do zespołu misyjnego w Czadzie. Zanim wiertnica ruszy, musisz ustalić, dlaczego poprzednia studnia zawiodła. Każda decyzja kosztuje czas, pieniądze albo zaufanie.</p>
+        <ul class="intro-rules">
+          <li><span>01</span>Zbieraj tropy i porównuj zeznania</li>
+          <li><span>02</span>Słuchaj mieszkańców — to ich studnia</li>
+          <li><span>03</span>Nie każda „szybka pomoc” jest trwałą pomocą</li>
+        </ul>
+        <button class="primary-button" id="startButton" type="button">OTWÓRZ AKTA MISJI <span>→</span></button>
+        <button class="resume-button" id="resumeButton" type="button" hidden>Kontynuuj zapisaną misję</button>
+        <p class="playtime">⏱ około 10 minut · 3 możliwe zakończenia</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
