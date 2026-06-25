@@ -86,7 +86,7 @@ const scenes = {
   }
 };
 
-const defaultState = { scene: "start", trust: 50, time: 8, budget: 15000, clues: [], flags: {}, history: [], started: false };
+const defaultState = { scene: "start", trust: 50, time: 8, budget: 15000, clues: [], flags: {}, history: [], started: false, lastFeedback: null };
 let state = structuredClone(defaultState);
 
 const $ = (id) => document.getElementById(id);
@@ -138,16 +138,14 @@ function choose(choice, index) {
   applyEffects(choice.effects);
   state.history.push({ scene: state.scene, choice: index });
   state.scene = choice.next;
+  state.lastFeedback = {
+    text: choice.feedback,
+    bad: (choice.effects?.trust || 0) < -10
+  };
   save();
-  updateStatus();
-  els.feedback.textContent = choice.feedback;
-  els.feedback.className = "feedback" + ((choice.effects?.trust || 0) < -10 ? " bad" : "");
-  els.feedback.hidden = false;
+  render();
   els.feedback.focus({ preventScroll: true });
-  setTimeout(() => {
-    render();
-    document.querySelector(".story-card").scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 1150);
+  document.querySelector(".story-card").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function ending() {
@@ -179,6 +177,7 @@ function ending() {
   els.title.textContent = title;
   els.text.innerHTML = `<div class="ending-card"><strong>${grade}</strong><p>${lead}</p></div><p>Zebrałeś ${evidence} z 5 tropów. Zakończyłeś misję z zaufaniem ${state.trust}%, budżetem ${formatMoney(state.budget)} i zapasem ${state.time} dni.</p><p><b>Najważniejszy wniosek:</b> studnia jest wspólnym systemem technicznym i społecznym. Potrzebuje bezpiecznego ujęcia, badań, dostępności, funduszu napraw i ludzi przygotowanych do opieki.</p>`;
   els.fact.hidden = true;
+  state.lastFeedback = null;
   els.feedback.hidden = true;
   els.choices.innerHTML = `<button class="choice-button restart-choice" type="button" id="playAgain"><span class="choice-number">↻</span><span class="choice-copy"><b>Zagraj ponownie</b><small>Odkryj inne tropy i zakończenie</small></span><span class="choice-arrow">→</span></button>`;
   $("playAgain").addEventListener("click", resetGame);
@@ -198,8 +197,14 @@ function render() {
   els.text.innerHTML = scene.text;
   els.fact.textContent = scene.fact || "";
   els.fact.hidden = !scene.fact;
-  els.feedback.hidden = true;
-  els.feedback.className = "feedback";
+  if (state.lastFeedback?.text) {
+    els.feedback.textContent = state.lastFeedback.text;
+    els.feedback.className = "feedback" + (state.lastFeedback.bad ? " bad" : "");
+    els.feedback.hidden = false;
+  } else {
+    els.feedback.hidden = true;
+    els.feedback.className = "feedback";
+  }
   els.choices.innerHTML = scene.choices.map((choice, index) => `
     <button class="choice-button" type="button" data-choice="${index}">
       <span class="choice-number">0${index + 1}</span>
