@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bree+Serif&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260625-1">
+  <link rel="stylesheet" href="styles.css?v=20260625-2">
 </head>
 <body>
   <a class="skip-link" href="#game">Przejdź do gry</a>
@@ -54,55 +54,65 @@
       </article>
     </section>
 
-    <aside class="field-panel" aria-label="Dziennik terenowy">
-      <section class="status-card">
-        <div class="status-head">
-          <div>
-            <span class="micro-label">DZIEŃ MISJI</span>
-            <strong id="dayValue">—</strong>
-          </div>
-          <div class="weather"><span aria-hidden="true">☀</span><b>41°C</b><small>pora sucha</small></div>
-        </div>
+    <aside class="field-panel" id="missionPanel" aria-label="Dziennik terenowy">
+      <button class="panel-toggle" id="missionPanelToggle" type="button" aria-expanded="false" aria-controls="missionPanelContent">
+        <span class="panel-toggle-title">Dziennik</span>
+        <span class="panel-stat"><i aria-hidden="true">☀</i><b id="mobileDayValue">—</b><small>dzień</small></span>
+        <span class="panel-stat"><i aria-hidden="true">♥</i><b id="mobileTrustValue">50%</b><small>ufność</small></span>
+        <span class="panel-stat"><i aria-hidden="true">⏳</i><b id="mobileTimeValue">8</b><small>dni</small></span>
+        <span class="panel-stat"><i aria-hidden="true">zł</i><b id="mobileBudgetValue">15k</b><small>budżet</small></span>
+      </button>
 
-        <div class="meters">
-          <div class="meter-row">
-            <div><span>Zaufanie wioski</span><b id="trustValue">50%</b></div>
-            <div class="meter"><i id="trustBar"></i></div>
+      <div class="panel-content" id="missionPanelContent">
+        <section class="status-card">
+          <div class="status-head">
+            <div>
+              <span class="micro-label">DZIEŃ MISJI</span>
+              <strong id="dayValue">—</strong>
+            </div>
+            <div class="weather"><span aria-hidden="true">☀</span><b>41°C</b><small>pora sucha</small></div>
           </div>
-          <div class="meter-row">
-            <div><span>Czas do deszczy</span><b id="timeValue">8 dni</b></div>
-            <div class="meter danger"><i id="timeBar"></i></div>
-          </div>
-          <div class="meter-row">
-            <div><span>Budżet</span><b id="budgetValue">15 000 zł</b></div>
-            <div class="meter money"><i id="budgetBar"></i></div>
-          </div>
-        </div>
-      </section>
 
-      <section class="notebook">
-        <div class="notebook-head">
-          <div>
-            <span class="micro-label">NOTATNIK TERENOWY</span>
-            <h2>Trop(y) <b id="clueCount">0/5</b></h2>
+          <div class="meters">
+            <div class="meter-row">
+              <div><span>Zaufanie wioski</span><b id="trustValue">50%</b></div>
+              <div class="meter"><i id="trustBar"></i></div>
+            </div>
+            <div class="meter-row">
+              <div><span>Czas do deszczy</span><b id="timeValue">8 dni</b></div>
+              <div class="meter danger"><i id="timeBar"></i></div>
+            </div>
+            <div class="meter-row">
+              <div><span>Budżet</span><b id="budgetValue">15 000 zł</b></div>
+              <div class="meter money"><i id="budgetBar"></i></div>
+            </div>
           </div>
-          <span class="paperclip" aria-hidden="true"></span>
-        </div>
-        <div id="clueList" class="clue-list">
-          <p class="empty-note">Wysłuchuj ludzi. Sprawdzaj szczegóły. Nie każda sprzeczność oznacza oszustwo.</p>
-        </div>
-      </section>
+        </section>
 
-      <section class="map-card">
-        <span class="micro-label">SZKIC TERENU</span>
-        <div class="mini-map" aria-label="Schemat wioski Béré">
-          <span class="map-road"></span>
-          <i class="map-pin school"><b>szkoła</b></i>
-          <i class="map-pin clinic"><b>klinika</b></i>
-          <i class="map-pin bore"><b>stary odwiert</b></i>
-          <span class="dry-river">pora deszczowa →</span>
-        </div>
-      </section>
+        <section class="notebook">
+          <div class="notebook-head">
+            <div>
+              <span class="micro-label">NOTATNIK TERENOWY</span>
+              <h2>Trop(y) <b id="clueCount">0/5</b></h2>
+            </div>
+            <span class="paperclip" aria-hidden="true"></span>
+          </div>
+          <div id="clueList" class="clue-list">
+            <p class="empty-note">Wysłuchuj ludzi. Sprawdzaj szczegóły. Nie każda sprzeczność oznacza oszustwo.</p>
+          </div>
+        </section>
+
+        <section class="map-card">
+          <span class="micro-label">SZKIC TERENU</span>
+          <div class="mini-map" aria-label="Schemat wioski Béré">
+            <span class="map-road"></span>
+            <i class="map-pin school"><b>szkoła</b></i>
+            <i class="map-pin clinic"><b>klinika</b></i>
+            <i class="map-pin bore"><b>stary odwiert</b></i>
+            <span class="dry-river">pora deszczowa →</span>
+          </div>
+        </section>
+      </div>
     </aside>
   </main>
 
@@ -151,6 +161,6 @@
     </div>
   </div>
 
-  <script src="game.js?v=20260625-1"></script>
+  <script src="game.js?v=20260625-2"></script>
 </body>
 </html>
