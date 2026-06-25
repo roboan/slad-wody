@@ -92,14 +92,21 @@ let state = structuredClone(defaultState);
 const $ = (id) => document.getElementById(id);
 const els = {
   overlay: $("introOverlay"), start: $("startButton"), resume: $("resumeButton"), reset: $("resetButton"),
+  panel: $("missionPanel"), panelToggle: $("missionPanelToggle"),
   chapter: $("chapterTag"), progress: $("progressBar"), progressText: $("progressText"), day: $("dayValue"),
   eyebrow: $("eyebrow"), title: $("sceneTitle"), text: $("sceneText"), fact: $("factCard"), choices: $("choices"), feedback: $("feedback"),
   trustValue: $("trustValue"), trustBar: $("trustBar"), timeValue: $("timeValue"), timeBar: $("timeBar"), budgetValue: $("budgetValue"), budgetBar: $("budgetBar"),
-  clueCount: $("clueCount"), clueList: $("clueList")
+  clueCount: $("clueCount"), clueList: $("clueList"),
+  mobileDay: $("mobileDayValue"), mobileTrust: $("mobileTrustValue"), mobileTime: $("mobileTimeValue"), mobileBudget: $("mobileBudgetValue")
 };
 
 function clamp(value, min, max) { return Math.min(max, Math.max(min, value)); }
 function formatMoney(value) { return new Intl.NumberFormat("pl-PL").format(Math.max(0, value)) + " zł"; }
+function formatCompactMoney(value) {
+  const safe = Math.max(0, value);
+  if (safe >= 1000) return Math.round(safe / 1000) + "k";
+  return String(safe);
+}
 function save() { localStorage.setItem("slad-wody-save", JSON.stringify(state)); }
 function load() {
   try {
@@ -115,6 +122,10 @@ function updateStatus() {
   els.timeBar.style.width = clamp(state.time / 8 * 100, 0, 100) + "%";
   els.budgetValue.textContent = formatMoney(state.budget);
   els.budgetBar.style.width = clamp(state.budget / 15000 * 100, 0, 100) + "%";
+  els.mobileDay.textContent = scenes[state.scene]?.day || "8";
+  els.mobileTrust.textContent = state.trust + "%";
+  els.mobileTime.textContent = state.time;
+  els.mobileBudget.textContent = formatCompactMoney(state.budget);
   els.clueCount.textContent = state.clues.length + "/5";
   if (!state.clues.length) {
     els.clueList.innerHTML = `<p class="empty-note">Wysłuchuj ludzi. Sprawdzaj szczegóły. Nie każda sprzeczność oznacza oszustwo.</p>`;
@@ -243,4 +254,8 @@ document.body.style.overflow = "hidden";
 els.start.addEventListener("click", () => begin(true));
 els.resume.addEventListener("click", () => begin(false));
 els.reset.addEventListener("click", resetGame);
+els.panelToggle.addEventListener("click", () => {
+  const isOpen = els.panel.classList.toggle("is-open");
+  els.panelToggle.setAttribute("aria-expanded", String(isOpen));
+});
 render();
